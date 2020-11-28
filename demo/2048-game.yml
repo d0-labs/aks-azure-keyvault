@@ -47,9 +47,6 @@ spec:
         - name: secrets-store-inline
           mountPath: "/mnt/secrets-store"
           readOnly: true
-        env:
-          - name: KUBERNETES_SERVICE_HOST
-            value: k8spoc-aks
       volumes:
         - name: secrets-store-inline
           csi:

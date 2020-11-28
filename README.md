@@ -4,7 +4,7 @@
 
 It addresses a shortcoming with Kubernets `secrets` shortcoming, whereby they are only Base64-encoded, and can therefore be easily read.
 
-Secrets Store CSI Driver provides seamless integration with Azure Keyvault, and allows you to access Kubernetes secrets via environment variables or as  volumes (more secure) mounted to your `Pod` or `Deployment`.
+Secrets Store CSI Driver provides seamless integration with Azure Keyvault, and allows you to access Kubernetes secrets via environment variables or as  volumes (more secure) mounted to your `Pod`.
 ## Setup
 
 1. Install Secrets Store CSI Driver for Azure v0.0.10 in Kubernetes
@@ -156,7 +156,7 @@ az identity show --resource-group $RESOURCE_GROUP --name $AZ_ID_NAME --query cli
 
 The `AzureIdentityBinding` resource was created as part of the [Azure Pod Identity](https://github.com/Azure/aad-pod-identity) installation in Step 2. It references the Azure Managed Identity created via `az identity create` in Step 3.
 
-It serves to glue to bind the `AzureIdentity` to a `Pod` or `Deployment`. This is done via the `selector` field. This field is refernced as a label in a `Pod` or `Deployment`'s definition.
+It serves to glue to bind the `AzureIdentity` to a `Pod`. This is done via the `selector` field. This field is refernced as a label in a `Pod`'s definition.
 
 Sample:
 
@@ -172,7 +172,7 @@ spec:
 
 The `azureIdentity` field refers to the name given to the `AzureIdentity`
 
-The `selector` field can be whatever you want; however, the same value must be referenced in your `Pod` or `Deployment` definition as a label.
+The `selector` field can be whatever you want; however, the same value must be referenced in your `Pod` definition as a label.
 
 For example:
 
@@ -237,9 +237,9 @@ Additional Fields:
 * `resourceGroup` is the name in which the KeyVault resides
 * `subscriptionId` is the KeyVault's subscription ID
 * `tenantId` is the Azure Tenant ID
-* `objects` lists the secrets/keys/certificates from the specified KeyVault in `keyvaultName` to be made available to the `Pod` or `Deployment`.
+* `objects` lists the secrets/keys/certificates from the specified KeyVault in `keyvaultName` to be made available to the `Pod`.
 
-The `Pod` or `Deployment` in turn access the secrets by mounting them as volumes, like this:
+The `Pod` in turn access the secrets by mounting them as volumes, like this:
 
 Sample deployment:
 
@@ -273,9 +273,6 @@ spec:
         - name: secrets-store-inline
           mountPath: "/mnt/secrets-store"
           readOnly: true
-        env:
-          - name: KUBERNETES_SERVICE_HOST
-            value: k8spoc-aks
       volumes:
         - name: secrets-store-inline
           csi:
