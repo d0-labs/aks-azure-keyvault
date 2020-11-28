@@ -4,7 +4,7 @@
 
 export LOCATION="eastus2"
 
-az login -u $AZ_USERNAME -p $AZPASSWORD && az account set --subscription $AZ_SUBSCRIPTION_ID
+az login -u $AZ_USERNAME -p $AZPASSWORD
 
 # Create resource group
 az group create --name $KV_RESOURCE_GROUP --location $LOCATION
