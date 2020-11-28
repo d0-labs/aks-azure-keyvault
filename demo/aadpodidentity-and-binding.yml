@@ -1,0 +1,26 @@
+# Azure AD Pod Identity is currently bound to the default namespace. 
+# Deploying an Azure Identity and its binding to other namespaces
+# will not work!
+
+---
+
+apiVersion: "aadpodidentity.k8s.io/v1"
+kind: AzureIdentity
+metadata:
+  name: demo-kv-az-id
+spec:
+  type: 0
+  # Managed identity resource ID
+  resourceID: <managed_identity_resource_id>
+  # Managed identity clientID
+  clientID: <managed_identity_client_id>
+
+---
+
+apiVersion: "aadpodidentity.k8s.io/v1"
+kind: AzureIdentityBinding
+metadata:
+  name: demo-kv-az-id-binding
+spec:
+  azureIdentity: demo-kv-az-id
+  selector: pod-id-binding
