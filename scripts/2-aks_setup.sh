@@ -14,9 +14,8 @@ az aks get-credentials --resource-group=$RESOURCE_GROUP --name=$AKS_CLUSTER_NAME
 # ----------------------
 
 # Reference: https://github.com/Azure/secrets-store-csi-driver-provider-azure#azure-key-vault-provider-for-secrets-store-csi-driver
-helm repo add csi-secrets-store-provider-azure https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts && helm repo update
 kubectl create ns csi
-helm install csi https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/blob/master/charts/csi-secrets-store-provider-azure-0.0.14.tgz -n csi
+helm install csi helm/csi-secrets-store-provider-azure-0.0.14.tar.gz -n csi
 
 # ----------------------
 # Install Azure Pod Identity v1.7.0
@@ -24,8 +23,7 @@ helm install csi https://raw.githubusercontent.com/Azure/secrets-store-csi-drive
 
 # Set up Pod Identity access to key vault
 kubectl create ns aad-pod-id
-helm repo add aad-pod-identity https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts
-helm install pod-identity https://raw.githubusercontent.com/Azure/aad-pod-identity/blob/master/charts/aad-pod-identity-2.0.3.tgz -n aad-pod-id
+helm install aad-pod-identity helm/aad-pod-identity-2.0.3.tar.gz -n aad-pod-id
 
 # ----------------------
 # Create Managed Identity
