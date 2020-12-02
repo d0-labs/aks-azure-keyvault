@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./0-env_vars.sh
+. ./0-env_vars.sh
 
 export LOCATION="eastus2"
 

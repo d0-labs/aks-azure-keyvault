@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./0-env_vars.sh
+. ./0-env_vars.sh
 
 # ----------------------
 # Login to Azure and set up kubectl
